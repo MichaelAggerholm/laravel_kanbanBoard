@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKanbanBoardTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateKanbanBoardTable extends Migration
      */
     public function up()
     {
-        Schema::create('kanban_board', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('task');
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('description');
             $table->string('type');
+            $table->string('kanbanList');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateKanbanBoardTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kanban_board');
+        Schema::dropIfExists('tasks');
     }
 }
