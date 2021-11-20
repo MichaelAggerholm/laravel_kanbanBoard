@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::resource('tasks', TaskController::class);
+
+Route::get('/moveToInProgress/{backlogTask}', [TaskController::class, 'moveToInProgress'])->name('moveToInProgress');

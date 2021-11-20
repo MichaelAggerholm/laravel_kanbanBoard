@@ -33,24 +33,32 @@
 </style>
 
 @section('content')
+    @if ($message = Session::get('success'))
+        <br>
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
     <div class="wrapper">
         <div id="backlogColumn" class="column">
             <h4 class="columnTitle">backlogColumn</h4>
-            @foreach($backlogTasks as $backlogTask)
-                <div class="task">
-                    <b>{{ $backlogTask->title }}</b>
-                    <p>{{ $backlogTask->description }}</p>
-                    <hr>
-                    <a href="#">B</a>
-                    <a href="#">I</a>
-                    <a href="#">T</a>
-                    <a href="#">D</a>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-            @endforeach
-        </div>
+@foreach($backlogTasks as $backlogTask)
+    <div class="task">
+        <b>{{ $backlogTask->title }}</b>
+        <p>{{ $backlogTask->description }}</p>
+        <hr>
+        <form action="{{ route('tasks.destroy',$backlogTask->id) }}" method="POST">
 
+            <a class="btn btn-info btn-sm" href="{{ route('moveToInProgress',$backlogTask->id) }}">I</a>
+
+            @csrf
+            @method('DELETE')
+
+            <button type="submit">Slet</button>
+        </form>
+    </div>
+@endforeach
+        </div>
         <div id="inProgressColumn" class="column">
             <h4 class="columnTitle">inProgressColumn</h4>
             @foreach($inProgressTasks as $inProgressTask)

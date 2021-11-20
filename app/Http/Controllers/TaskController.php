@@ -51,10 +51,10 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Task  $tasks
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $tasks)
+    public function show(Task $task)
     {
         //
     }
@@ -62,10 +62,10 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Task  $tasks
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $tasks)
+    public function edit(Task $task)
     {
         //
     }
@@ -74,10 +74,10 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $tasks
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $tasks)
+    public function update(Request $request, Task $task)
     {
         //
     }
@@ -85,11 +85,27 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Task  $tasks
+     * @param  \App\Models\Task $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $tasks)
+    public function destroy(Task $task)
     {
-        //
+        try {
+            $task->delete();
+
+            return redirect()->route('tasks.index')
+                ->with('success','Task deleted!');
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            var_dump($e->errorInfo);
+        }
+    }
+
+    public function moveToInProgress(Task $backlogTask)
+    {
+        $backlogTask->kanbanList = 'inProgress';
+        $backlogTask->save();
+
+        return redirect()->route('tasks.index');
     }
 }
