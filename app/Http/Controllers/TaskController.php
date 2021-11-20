@@ -101,10 +101,38 @@ class TaskController extends Controller
         }
     }
 
-    public function moveToInProgress(Task $backlogTask)
+    // Move task to backlog
+    public function moveToBacklog(Task $task)
     {
-        $backlogTask->kanbanList = 'inProgress';
-        $backlogTask->save();
+        $task->kanbanList = 'backlog';
+        $task->update();
+
+        return redirect()->route('tasks.index');
+    }
+
+    // Move task to inProgress
+    public function moveToInProgress(Task $task)
+    {
+        $task->kanbanList = 'inProgress';
+        $task->update();
+
+        return redirect()->route('tasks.index');
+    }
+
+    // Move task to Testing
+    public function moveToTesting(Task $task)
+    {
+        $task->kanbanList = 'testing';
+        $task->update();
+
+        return redirect()->route('tasks.index');
+    }
+
+    // Move task to Done
+    public function moveToDone(Task $task)
+    {
+        $task->kanbanList = 'done';
+        $task->update();
 
         return redirect()->route('tasks.index');
     }

@@ -12,7 +12,7 @@
         border: 1px solid gray;
         height: 700px;
         margin: 10px;
-        padding-top: 25px;
+        /*padding-top: 25px;*/
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
@@ -30,6 +30,17 @@
         padding-bottom: 3px;
         border-bottom: 1px solid gray;
     }
+    .titleBox{
+        background: #bfbfbf;
+        width: 100%;
+        padding-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
 </style>
 
 @section('content')
@@ -41,23 +52,27 @@
     @endif
     <div class="wrapper">
         <div id="backlogColumn" class="column">
-            <h4 class="columnTitle">backlogColumn</h4>
-@foreach($backlogTasks as $backlogTask)
-    <div class="task">
-        <b>{{ $backlogTask->title }}</b>
-        <p>{{ $backlogTask->description }}</p>
-        <hr>
-        <form action="{{ route('tasks.destroy',$backlogTask->id) }}" method="POST">
+            <div class="titleBox">
+                <h4 class="columnTitle">backlogColumn</h4>
+            </div>
+            @foreach($backlogTasks as $backlogTask)
+                <div class="task">
+                    <b>{{ $backlogTask->title }}</b>
+                    <p>{{ $backlogTask->description }}</p>
+                    <hr>
+                    <form action="{{ route('tasks.destroy',$backlogTask->id) }}" method="POST">
 
-            <a class="btn btn-info btn-sm" href="{{ route('moveToInProgress',$backlogTask->id) }}">I</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToInProgress',$backlogTask->id) }}">I</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToTesting',$backlogTask->id) }}">T</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToDone',$backlogTask->id) }}">D</a>
 
-            @csrf
-            @method('DELETE')
+                        @csrf
+                        @method('DELETE')
 
-            <button type="submit">Slet</button>
-        </form>
-    </div>
-@endforeach
+                        <button type="submit">Slet</button>
+                    </form>
+                </div>
+            @endforeach
         </div>
         <div id="inProgressColumn" class="column">
             <h4 class="columnTitle">inProgressColumn</h4>
@@ -66,12 +81,17 @@
                     <b>{{ $inProgressTask->title }}</b>
                     <p>{{ $inProgressTask->description }}</p>
                     <hr>
-                    <a href="#">B</a>
-                    <a href="#">I</a>
-                    <a href="#">T</a>
-                    <a href="#">D</a>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <form action="{{ route('tasks.destroy',$inProgressTask->id) }}" method="POST">
+
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToBacklog',$inProgressTask->id) }}">B</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToTesting',$inProgressTask->id) }}">T</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToDone',$inProgressTask->id) }}">D</a>
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">Slet</button>
+                    </form>
                 </div>
             @endforeach
         </div>
@@ -83,12 +103,17 @@
                     <b>{{ $testingTask->title }}</b>
                     <p>{{ $testingTask->description }}</p>
                     <hr>
-                    <a href="#">B</a>
-                    <a href="#">I</a>
-                    <a href="#">T</a>
-                    <a href="#">D</a>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <form action="{{ route('tasks.destroy',$testingTask->id) }}" method="POST">
+
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToBacklog',$testingTask->id) }}">B</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToInProgress',$testingTask->id) }}">I</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToDone',$testingTask->id) }}">D</a>
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">Slet</button>
+                    </form>
                 </div>
             @endforeach
         </div>
@@ -100,12 +125,17 @@
                     <b>{{ $doneTask->title }}</b>
                     <p>{{ $doneTask->description }}</p>
                     <hr>
-                    <a href="#">B</a>
-                    <a href="#">I</a>
-                    <a href="#">T</a>
-                    <a href="#">D</a>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <form action="{{ route('tasks.destroy',$doneTask->id) }}" method="POST">
+
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToBacklog',$doneTask->id) }}">B</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToInProgress',$doneTask->id) }}">I</a>
+                        <a class="btn btn-info btn-sm" href="{{ route('moveToTesting',$doneTask->id) }}">T</a>
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">Slet</button>
+                    </form>
                 </div>
             @endforeach
         </div>

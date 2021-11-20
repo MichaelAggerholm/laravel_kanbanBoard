@@ -21,4 +21,7 @@ Route::get('/', function () {
 
 Route::resource('tasks', TaskController::class);
 
-Route::get('/moveToInProgress/{backlogTask}', [TaskController::class, 'moveToInProgress'])->name('moveToInProgress');
+Route::get('/moveToBacklog/{task}', [TaskController::class, 'moveToBacklog'])->name('moveToBacklog');
+Route::get('/moveToInProgress/{task}', [TaskController::class, 'moveToInProgress'])->name('moveToInProgress');
+Route::get('/moveToTesting/{task}', [TaskController::class, 'moveToTesting'])->name('moveToTesting');
+Route::get('/moveToDone/{task}', [TaskController::class, 'moveToDone'])->name('moveToDone');
