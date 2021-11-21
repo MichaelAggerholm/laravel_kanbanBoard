@@ -66,6 +66,7 @@
         margin-bottom: 10px;
         font-size: 1.25rem;
         font-weight: bold;
+        width: 256px;
         /*font-family: 'Ubuntu', sans-serif;*/
     }
     .btn-sm, .btn-group-sm > .btn{
@@ -134,9 +135,22 @@
         color:black;
         background-color: #bbbbbb;
     }
+    .DeletegBtn{
+        color:black;
+        background-color: #e86c68;
+        font-weight: 600!important;
+        border: 1px solid #c5c5c5!important;
+    }
+    .DeletegBtn:hover{
+        color:black;
+        background-color: #da4e4a;
+    }
     .addInputGrp{
         display: flex!important;
         width:256px!important;
+    }
+    .alert{
+        height: 56px;
     }
 </style>
 
@@ -146,54 +160,47 @@
 
         <h1>Mit Kanban Board</h1>
 
-        @if ($message = Session::get('success'))
-            <br>
-            <div class="alert alert-success">
+        <br>
+        <div class="alert">
+            @if ($message = Session::get('success'))
                 <p>{{ $message }}</p>
-            </div>
-        @endif
-
-        <div class="input-group mb-3 addInputGrp" style="margin-bottom: 20px;">
-            <input type="text" class="form-control" style="margin-right: 5px;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-            <button type="submit" class="btn btn-primary">Add</button>
+            @endif
         </div>
+
+        <form action="{{ route('tasks.store') }}" method="POST">
+            @csrf
+            <div class="input-group mb-3 addInputGrp" style="margin-bottom: 20px;">
+                <input type="text" name="text" class="form-control" style="margin-right: 5px;" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="New task..">
+                <button type="submit" class="btn backlogBtn">Add</button>
+            </div>
+        </form>
 
         <div class="wrapper">
             <div class="card" style="max-width: 16rem; border:none;">
                 <div class="card-header bg-transparent" style="border:1px solid #c5c5c5;">Backlog</div>
                 <div class="card-body">
 
-                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body resultContainer" style="padding: 5px; background-color: #f5f5f5;">
-                            <h5 class="card-title">Test task 1</h5>
-                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <div style="height: 25px!important;">
-                                <div class="viewThisResult">
-                                    <a href="#" class="btn wipBtn btn-sm">W</a>
-                                    <a href="#" class="btn testBtn btn-sm">T</a>
-                                    <a href="#" class="btn doneBtn btn-sm">D</a>
-                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @foreach($backlogTasks as $backlogTask)
+                        <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                            <div class="card-body resultContainer" style="padding: 5px; background-color: #f5f5f5;">
+                                <p class="card-text">{{ $backlogTask->text }}</p>
+                                <div style="height: 25px!important;">
+                                    <div class="viewThisResult">
+                                        <form action="{{ route('tasks.destroy',$backlogTask->id) }}" method="POST">
 
-                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body resultContainer" style="padding: 5px; background-color: #f5f5f5;">
-                            <h5 class="card-title">Test task 1</h5>
-                            <p class="card-text">Deadlights jack lad schooner scallywag dance the hempen jig carouser broadside</p>
-                            <div style="height: 25px!important;">
-                                <div class="viewThisResult">
-                                    <a href="#" class="btn wipBtn btn-sm">W</a>
-                                    <a href="#" class="btn testBtn btn-sm">T</a>
-                                    <a href="#" class="btn doneBtn btn-sm">D</a>
-                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ route('moveToInProgress',$backlogTask->id) }}" class="btn wipBtn btn-sm">W</a>
+                                            <a href="{{ route('moveToTesting',$backlogTask->id) }}" class="btn testBtn btn-sm">T</a>
+                                            <a href="{{ route('moveToDone',$backlogTask->id) }}" class="btn doneBtn btn-sm">D</a>
+
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn DeletegBtn btn-sm" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -202,21 +209,27 @@
                 <div class="card-header bg-transparent" style="border:1px solid #c5c5c5; background-color: #e9c4c4;">WIP</div>
                 <div class="card-body">
 
-                    <div class="card" style="width: 16rem; border:1px solid #e1afaf;;">
-                        <div class="card-body resultContainer" style="padding: 5px; background-color: #e9c4c4;">
-                            <h5 class="card-title">Test task 1</h5>
-                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <div style="height: 25px!important;">
-                                <div class="viewThisResult">
-                                    <a href="#" class="btn backlogBtn btn-sm">B</a>
-                                    <a href="#" class="btn testBtn btn-sm">T</a>
-                                    <a href="#" class="btn doneBtn btn-sm">D</a>
-                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                    @foreach($inProgressTasks as $inProgressTask)
+                        <div class="card" style="width: 16rem; border:1px solid #e1afaf;;">
+                            <div class="card-body resultContainer" style="padding: 5px; background-color: #e9c4c4;">
+                                <p class="card-text">{{ $inProgressTask->text }}</p>
+                                <div style="height: 25px!important;">
+                                    <div class="viewThisResult">
+                                        <form action="{{ route('tasks.destroy',$inProgressTask->id) }}" method="POST">
+
+                                            <a href="{{ route('moveToBacklog',$inProgressTask->id) }}" class="btn backlogBtn btn-sm">B</a>
+                                            <a href="{{ route('moveToTesting',$inProgressTask->id) }}" class="btn testBtn btn-sm">T</a>
+                                            <a href="{{ route('moveToDone',$inProgressTask->id) }}" class="btn doneBtn btn-sm">D</a>
+
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn DeletegBtn btn-sm" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -225,21 +238,27 @@
                 <div class="card-header bg-transparent" style="border:1px solid #c5c5c5; background-color: #f7f2cd;">Testing</div>
                 <div class="card-body">
 
-                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body resultContainer" style="padding: 5px; background-color: #f7f2cd;">
-                            <h5 class="card-title">Test task 1</h5>
-                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <div style="height: 25px!important;">
-                                <div class="viewThisResult">
-                                    <a href="#" class="btn backlogBtn btn-sm">B</a>
-                                    <a href="#" class="btn wipBtn btn-sm">W</a>
-                                    <a href="#" class="btn doneBtn btn-sm">D</a>
-                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                    @foreach($testingTasks as $testingTask)
+                        <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                            <div class="card-body resultContainer" style="padding: 5px; background-color: #f7f2cd;">
+                                <p class="card-text">{{ $testingTask->text }}</p>
+                                <div style="height: 25px!important;">
+                                    <div class="viewThisResult">
+                                        <form action="{{ route('tasks.destroy',$testingTask->id) }}" method="POST">
+
+                                            <a href="{{ route('moveToBacklog',$testingTask->id) }}" class="btn backlogBtn btn-sm">B</a>
+                                            <a href="{{ route('moveToInProgress',$testingTask->id) }}" class="btn wipBtn btn-sm">W</a>
+                                            <a href="{{ route('moveToDone',$testingTask->id) }}" class="btn doneBtn btn-sm">D</a>
+
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn DeletegBtn btn-sm" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -248,21 +267,27 @@
                 <div class="card-header bg-transparent" style="border:1px solid #c5c5c5; background-color: #cdfbd0;">Done</div>
                 <div class="card-body">
 
-                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body resultContainer" style="padding: 5px; background-color: #cdfbd0;">
-                            <h5 class="card-title">Test task 1</h5>
-                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <div style="height: 25px!important;">
-                                <div class="viewThisResult">
-                                    <a href="#" class="btn backlogBtn btn-sm">B</a>
-                                    <a href="#" class="btn wipBtn btn-sm">W</a>
-                                    <a href="#" class="btn testBtn btn-sm">T</a>
-                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                    @foreach($doneTasks as $doneTask)
+                        <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                            <div class="card-body resultContainer" style="padding: 5px; background-color: #cdfbd0;">
+                                <p class="card-text">{{ $doneTask->text }}</p>
+                                <div style="height: 25px!important;">
+                                    <div class="viewThisResult">
+                                        <form action="{{ route('tasks.destroy',$doneTask->id) }}" method="POST">
+
+                                            <a href="{{ route('moveToBacklog',$doneTask->id) }}" class="btn backlogBtn btn-sm">B</a>
+                                            <a href="{{ route('moveToInProgress',$doneTask->id) }}" class="btn wipBtn btn-sm">W</a>
+                                            <a href="{{ route('moveToTesting',$doneTask->id) }}" class="btn testBtn btn-sm">T</a>
+
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn DeletegBtn btn-sm" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
                 </div>
             </div>

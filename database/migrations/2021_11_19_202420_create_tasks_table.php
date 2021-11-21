@@ -15,10 +15,8 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->string('type');
-            $table->string('kanbanList');
+            $table->string('text');
+            $table->string('kanbanList')->default('backlog');
             $table->timestamps();
         });
     }

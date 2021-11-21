@@ -10,6 +10,6 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'type', 'kanbanList'
+        'text', 'kanbanList'
     ];
 }
