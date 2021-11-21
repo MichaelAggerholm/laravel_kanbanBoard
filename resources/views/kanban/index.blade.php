@@ -1,47 +1,6 @@
 @extends('kanban.layout')
 
 <style>
-    /*.wrapper{*/
-    /*    display: flex;*/
-    /*    flex-direction: row;*/
-    /*    flex-wrap: nowrap;*/
-    /*    justify-content: space-around;*/
-    /*}*/
-    /*.column {*/
-    /*    width: 300px;*/
-    /*    border: 1px solid gray;*/
-    /*    height: 700px;*/
-    /*    margin: 10px;*/
-    /*    !*padding-top: 25px;*!*/
-    /*    display: flex;*/
-    /*    flex-direction: column;*/
-    /*    flex-wrap: nowrap;*/
-    /*    align-items: center;*/
-    /*}*/
-    /*.task{*/
-    /*    background: yellow;*/
-    /*    width: 90%;*/
-    /*    height: 140px;*/
-    /*    padding: 10px;*/
-    /*    margin: 5px;*/
-    /*    border: 1px solid gray;*/
-    /*}*/
-    /*.columnTitle{*/
-    /*    padding-bottom: 3px;*/
-    /*    border-bottom: 1px solid gray;*/
-    /*}*/
-    /*.titleBox{*/
-    /*    background: #bfbfbf;*/
-    /*    width: 100%;*/
-    /*    padding-top: 10px;*/
-    /*    display: flex;*/
-    /*    align-items: center;*/
-    /*    justify-content: center;*/
-    /*    align-content: center;*/
-    /*    flex-direction: column;*/
-    /*    flex-wrap: wrap;*/
-    /*}*/
-
     .container{
         margin-top: 50px;
         display: flex;
@@ -67,7 +26,6 @@
         font-size: 1.25rem;
         font-weight: bold;
         width: 256px;
-        /*font-family: 'Ubuntu', sans-serif;*/
     }
     .btn-sm, .btn-group-sm > .btn{
         font-family: 'Ubuntu', sans-serif;
@@ -85,15 +43,9 @@
     .resultContainer:hover .viewThisResult{
         display: inline;
     }
-    .card-title{
-        font-size: 1.25rem;
-        font-weight: bold;
-    }
     .card-text{
         text-align: left;
         font-weight: 600;
-        /*font-family: 'Ubuntu', sans-serif;*/
-        /*text-align: justify;*/
     }
     .wipBtn{
         color:black;
@@ -159,8 +111,8 @@
     <div class="container">
 
         <h1>Mit Kanban Board</h1>
-
         <br>
+
         <div class="alert">
             @if ($message = Session::get('success'))
                 <p>{{ $message }}</p>
@@ -292,96 +244,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-{{--        <div id="backlogColumn" class="column">--}}
-{{--            <div class="titleBox">--}}
-{{--                <h4 class="columnTitle">backlogColumn</h4>--}}
-{{--            </div>--}}
-{{--            @foreach($backlogTasks as $backlogTask)--}}
-{{--                <div class="task">--}}
-{{--                    <b>{{ $backlogTask->title }}</b>--}}
-{{--                    <p>{{ $backlogTask->description }}</p>--}}
-{{--                    <hr>--}}
-{{--                    <form action="{{ route('tasks.destroy',$backlogTask->id) }}" method="POST">--}}
-
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToInProgress',$backlogTask->id) }}">I</a>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToTesting',$backlogTask->id) }}">T</a>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToDone',$backlogTask->id) }}">D</a>--}}
-
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-
-{{--                        <button type="submit">Slet</button>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
-{{--        <div id="inProgressColumn" class="column">--}}
-{{--            <h4 class="columnTitle">inProgressColumn</h4>--}}
-{{--            @foreach($inProgressTasks as $inProgressTask)--}}
-{{--                <div class="task">--}}
-{{--                    <b>{{ $inProgressTask->title }}</b>--}}
-{{--                    <p>{{ $inProgressTask->description }}</p>--}}
-{{--                    <hr>--}}
-{{--                    <form action="{{ route('tasks.destroy',$inProgressTask->id) }}" method="POST">--}}
-
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToBacklog',$inProgressTask->id) }}">B</a>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToTesting',$inProgressTask->id) }}">T</a>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToDone',$inProgressTask->id) }}">D</a>--}}
-
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-
-{{--                        <button type="submit">Slet</button>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
-
-{{--        <div id="testingColumn" class="column">--}}
-{{--            <h4 class="columnTitle">testingColumn</h4>--}}
-{{--            @foreach($testingTasks as $testingTask)--}}
-{{--                <div class="task">--}}
-{{--                    <b>{{ $testingTask->title }}</b>--}}
-{{--                    <p>{{ $testingTask->description }}</p>--}}
-{{--                    <hr>--}}
-{{--                    <form action="{{ route('tasks.destroy',$testingTask->id) }}" method="POST">--}}
-
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToBacklog',$testingTask->id) }}">B</a>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToInProgress',$testingTask->id) }}">I</a>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToDone',$testingTask->id) }}">D</a>--}}
-
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-
-{{--                        <button type="submit">Slet</button>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
-
-{{--        <div id="doneColumn" class="column">--}}
-{{--            <h4 class="columnTitle">doneColumn</h4>--}}
-{{--            @foreach($doneTasks as $doneTask)--}}
-{{--                <div class="task">--}}
-{{--                    <b>{{ $doneTask->title }}</b>--}}
-{{--                    <p>{{ $doneTask->description }}</p>--}}
-{{--                    <hr>--}}
-{{--                    <form action="{{ route('tasks.destroy',$doneTask->id) }}" method="POST">--}}
-
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToBacklog',$doneTask->id) }}">B</a>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToInProgress',$doneTask->id) }}">I</a>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('moveToTesting',$doneTask->id) }}">T</a>--}}
-
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-
-{{--                        <button type="submit">Slet</button>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
-{{--    </div>--}}
 @endsection
