@@ -48,10 +48,13 @@
         text-align: center;
         flex-direction: column;
         flex-wrap: wrap;
+        font-family: 'Ubuntu', sans-serif;
     }
     .container>h1{
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid lightgray;
         margin-bottom: 30px;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: bold;
     }
     .wrapper{
         display: flex;
@@ -61,23 +64,99 @@
     }
     .card-header{
         margin-bottom: 10px;
+        font-size: 1.25rem;
+        font-weight: bold;
+        /*font-family: 'Ubuntu', sans-serif;*/
     }
     .btn-sm, .btn-group-sm > .btn{
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 600;
         font-size: .75rem !important;
         line-height: 1 !important;
+    }
+    a, a:hover, a:focus, a:active{
+        text-decoration: none;
+        color: inherit;
+    }
+    .resultContainer .viewThisResult{
+        display: none;
+    }
+    .resultContainer:hover .viewThisResult{
+        display: inline;
+    }
+    .card-title{
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    .card-text{
+        text-align: left;
+        font-weight: 600;
+        /*font-family: 'Ubuntu', sans-serif;*/
+        /*text-align: justify;*/
+    }
+    .wipBtn{
+        color:black;
+        background-color: #e9c4c4;
+        font-weight: 600!important;
+        border: 1px solid #c5c5c5!important;
+    }
+    .wipBtn:hover{
+        color:black;
+        background-color: #e79393;
+    }
+    .testBtn{
+        color:black;
+        background-color: #f7f2cd;
+        font-weight: 600!important;
+        border: 1px solid #c5c5c5!important;
+    }
+    .testBtn:hover{
+        color:black;
+        background-color: #ece774;
+    }
+    .doneBtn{
+        color:black;
+        background-color: #cdfbd0;
+        font-weight: 600!important;
+        border: 1px solid #c5c5c5!important;
+    }
+    .doneBtn:hover{
+        color:black;
+        background-color: #73d778;
+    }
+    .backlogBtn{
+        color:black;
+        background-color: #f5f5f5;
+        font-weight: 600!important;
+        border: 1px solid #c5c5c5!important;
+    }
+    .backlogBtn:hover{
+        color:black;
+        background-color: #bbbbbb;
+    }
+    .addInputGrp{
+        display: flex!important;
+        width:256px!important;
     }
 </style>
 
 @section('content')
-    @if ($message = Session::get('success'))
-        <br>
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+
     <div class="container">
 
-        <h1>Kanban Board</h1>
+        <h1>Mit Kanban Board</h1>
+
+        @if ($message = Session::get('success'))
+            <br>
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+
+        <div class="input-group mb-3 addInputGrp" style="margin-bottom: 20px;">
+            <input type="text" class="form-control" style="margin-right: 5px;" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
 
         <div class="wrapper">
             <div class="card" style="max-width: 16rem; border:none;">
@@ -85,38 +164,34 @@
                 <div class="card-body">
 
                     <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                        <div class="card-body resultContainer" style="padding: 5px; background-color: #f5f5f5;">
                             <h5 class="card-title">Test task 1</h5>
                             <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <a href="#" class="btn btn-primary btn-sm">W</a>
-                            <a href="#" class="btn btn-primary btn-sm">T</a>
-                            <a href="#" class="btn btn-primary btn-sm">D</a>
-                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                            <div style="height: 25px!important;">
+                                <div class="viewThisResult">
+                                    <a href="#" class="btn wipBtn btn-sm">W</a>
+                                    <a href="#" class="btn testBtn btn-sm">T</a>
+                                    <a href="#" class="btn doneBtn btn-sm">D</a>
+                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                        <div class="card-body resultContainer" style="padding: 5px; background-color: #f5f5f5;">
                             <h5 class="card-title">Test task 1</h5>
-                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <a href="#" class="btn btn-primary btn-sm">W</a>
-                            <a href="#" class="btn btn-primary btn-sm">T</a>
-                            <a href="#" class="btn btn-primary btn-sm">D</a>
-                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
-                            <h5 class="card-title">Test task 1</h5>
-                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <a href="#" class="btn btn-primary btn-sm">W</a>
-                            <a href="#" class="btn btn-primary btn-sm">T</a>
-                            <a href="#" class="btn btn-primary btn-sm">D</a>
-                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                            <p class="card-text">Deadlights jack lad schooner scallywag dance the hempen jig carouser broadside</p>
+                            <div style="height: 25px!important;">
+                                <div class="viewThisResult">
+                                    <a href="#" class="btn wipBtn btn-sm">W</a>
+                                    <a href="#" class="btn testBtn btn-sm">T</a>
+                                    <a href="#" class="btn doneBtn btn-sm">D</a>
+                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -124,34 +199,22 @@
             </div>
 
             <div class="card" style="max-width: 16rem; border:none;">
-                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5;">Backlog</div>
+                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5; background-color: #e9c4c4;">WIP</div>
                 <div class="card-body">
 
-                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                    <div class="card" style="width: 16rem; border:1px solid #e1afaf;;">
+                        <div class="card-body resultContainer" style="padding: 5px; background-color: #e9c4c4;">
                             <h5 class="card-title">Test task 1</h5>
                             <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <a href="#" class="btn btn-primary btn-sm">W</a>
-                            <a href="#" class="btn btn-primary btn-sm">T</a>
-                            <a href="#" class="btn btn-primary btn-sm">D</a>
-                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div style="height: 25px!important;">
+                                <div class="viewThisResult">
+                                    <a href="#" class="btn backlogBtn btn-sm">B</a>
+                                    <a href="#" class="btn testBtn btn-sm">T</a>
+                                    <a href="#" class="btn doneBtn btn-sm">D</a>
+                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -159,34 +222,22 @@
             </div>
 
             <div class="card" style="max-width: 16rem; border:none;">
-                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5;">Backlog</div>
+                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5; background-color: #f7f2cd;">Testing</div>
                 <div class="card-body">
 
                     <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                        <div class="card-body resultContainer" style="padding: 5px; background-color: #f7f2cd;">
                             <h5 class="card-title">Test task 1</h5>
                             <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <a href="#" class="btn btn-primary btn-sm">W</a>
-                            <a href="#" class="btn btn-primary btn-sm">T</a>
-                            <a href="#" class="btn btn-primary btn-sm">D</a>
-                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div style="height: 25px!important;">
+                                <div class="viewThisResult">
+                                    <a href="#" class="btn backlogBtn btn-sm">B</a>
+                                    <a href="#" class="btn wipBtn btn-sm">W</a>
+                                    <a href="#" class="btn doneBtn btn-sm">D</a>
+                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -194,34 +245,22 @@
             </div>
 
             <div class="card" style="max-width: 16rem; border:none;">
-                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5;">Backlog</div>
+                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5; background-color: #cdfbd0;">Done</div>
                 <div class="card-body">
 
                     <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
-                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                        <div class="card-body resultContainer" style="padding: 5px; background-color: #cdfbd0;">
                             <h5 class="card-title">Test task 1</h5>
                             <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
-                            <a href="#" class="btn btn-primary btn-sm">W</a>
-                            <a href="#" class="btn btn-primary btn-sm">T</a>
-                            <a href="#" class="btn btn-primary btn-sm">D</a>
-                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div style="height: 25px!important;">
+                                <div class="viewThisResult">
+                                    <a href="#" class="btn backlogBtn btn-sm">B</a>
+                                    <a href="#" class="btn wipBtn btn-sm">W</a>
+                                    <a href="#" class="btn testBtn btn-sm">T</a>
+                                    <a href="#" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
