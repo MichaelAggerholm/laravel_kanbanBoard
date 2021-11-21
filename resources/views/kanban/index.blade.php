@@ -59,6 +59,13 @@
         flex-wrap: wrap;
         justify-content: space-between;
     }
+    .card-header{
+        margin-bottom: 10px;
+    }
+    .btn-sm, .btn-group-sm > .btn{
+        font-size: .75rem !important;
+        line-height: 1 !important;
+    }
 </style>
 
 @section('content')
@@ -73,43 +80,151 @@
         <h1>Kanban Board</h1>
 
         <div class="wrapper">
-            <div class="card" style="width: 16rem;">
+            <div class="card" style="max-width: 16rem; border:none;">
+                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5;">Backlog</div>
                 <div class="card-body">
-                    <h5 class="card-title">Backlog</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+
+                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                            <h5 class="card-title">Test task 1</h5>
+                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
+                            <a href="#" class="btn btn-primary btn-sm">W</a>
+                            <a href="#" class="btn btn-primary btn-sm">T</a>
+                            <a href="#" class="btn btn-primary btn-sm">D</a>
+                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
+                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                            <h5 class="card-title">Test task 1</h5>
+                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
+                            <a href="#" class="btn btn-primary btn-sm">W</a>
+                            <a href="#" class="btn btn-primary btn-sm">T</a>
+                            <a href="#" class="btn btn-primary btn-sm">D</a>
+                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
+                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                            <h5 class="card-title">Test task 1</h5>
+                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
+                            <a href="#" class="btn btn-primary btn-sm">W</a>
+                            <a href="#" class="btn btn-primary btn-sm">T</a>
+                            <a href="#" class="btn btn-primary btn-sm">D</a>
+                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
+                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="card" style="width: 16rem;">
+            <div class="card" style="max-width: 16rem; border:none;">
+                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5;">Backlog</div>
                 <div class="card-body">
-                    <h5 class="card-title">WIP</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+
+                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                            <h5 class="card-title">Test task 1</h5>
+                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
+                            <a href="#" class="btn btn-primary btn-sm">W</a>
+                            <a href="#" class="btn btn-primary btn-sm">T</a>
+                            <a href="#" class="btn btn-primary btn-sm">D</a>
+                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
+                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="card" style="width: 16rem;">
+            <div class="card" style="max-width: 16rem; border:none;">
+                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5;">Backlog</div>
                 <div class="card-body">
-                    <h5 class="card-title">Test</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+
+                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                            <h5 class="card-title">Test task 1</h5>
+                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
+                            <a href="#" class="btn btn-primary btn-sm">W</a>
+                            <a href="#" class="btn btn-primary btn-sm">T</a>
+                            <a href="#" class="btn btn-primary btn-sm">D</a>
+                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
+                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="card" style="width: 16rem;">
+            <div class="card" style="max-width: 16rem; border:none;">
+                <div class="card-header bg-transparent" style="border:1px solid #c5c5c5;">Backlog</div>
                 <div class="card-body">
-                    <h5 class="card-title">Done</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+
+                    <div class="card" style="width: 16rem; border:1px solid #c5c5c5;">
+                        <div class="card-body" style="padding: 5px; background-color: #f5f5f5;">
+                            <h5 class="card-title">Test task 1</h5>
+                            <p class="card-text">Dette er test task 1, Dette er test task 1, Dette er test task 1</p>
+                            <a href="#" class="btn btn-primary btn-sm">W</a>
+                            <a href="#" class="btn btn-primary btn-sm">T</a>
+                            <a href="#" class="btn btn-primary btn-sm">D</a>
+                            <a href="#" class="btn btn-primary btn-sm">Delete</a>
+                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
